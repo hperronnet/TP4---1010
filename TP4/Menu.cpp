@@ -1,6 +1,7 @@
 /*
-* Date : 25 février 2019
-* Auteur : AbdeB
+* Titre : Menu.cpp - Travail Pratique #4
+* Date : 21 Mars 2019
+* Auteurs : Hugo Perronnet 1885263 - Philippe Maisonneuve 1959052
 */
 
 #include "Menu.h"
@@ -37,22 +38,22 @@ Menu::Menu(const Menu & menu) : type_(menu.type_)
 {
 	for (Plat* plat : menu.listePlats_)
 	{
-		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
-		PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
+		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);		//Si le type du plat est PlatVege, dynamic_cast est réussi et le plat retourné est différent de nullptr
+		PlatBio* platBio = dynamic_cast<PlatBio*>(plat);		//Pareil pour PlatBio et PlatBioVege
 		PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
 
-		if (platVege != nullptr) {
+		if (platVege != nullptr) {				//On ajoute le platVege dans les deux listes			
 			listePlats_.push_back(platVege);
 			listePlatsVege_.push_back(platVege);
 		}
 		else if (platBio != nullptr) {
 			listePlats_.push_back(platBio);
 		}
-		else if (platBioVege != nullptr) {
+		else if (platBioVege != nullptr) {		//On ajoute le platVege dans les deux listes
 			listePlats_.push_back(platBioVege);
 			listePlatsVege_.push_back(platBioVege);
 		}
-		else {
+		else {									//Si le plat ne correspond à aucun type spécial, on l'ajoute dans la lsite sans cast.
 			listePlats_.push_back(plat);
 		}
 
@@ -61,21 +62,22 @@ Menu::Menu(const Menu & menu) : type_(menu.type_)
 
 Menu & Menu::operator=(const Menu & menu)
 {
-	if (this != &menu)
+	if (this != &menu)						//On vérie que l'adresse du menu à copier et le menu acutel ne sont pas les mêmes
 	{
-		type_ = menu.type_;
+		type_ = menu.type_;					//On écrase les menus
 		for (Plat* plat : listePlats_) {
 			delete plat;
 		}
-
 		listePlats_.clear();
 		listePlatsVege_.clear();
+
 		for (Plat* plat : menu.listePlats_) {
-			PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
-			PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
+			PlatVege* platVege = dynamic_cast<PlatVege*>(plat);		//Si le type du plat est PlatVege, dynamic_cast est réussi et le plat retourné est différent de nullptr
+			PlatBio* platBio = dynamic_cast<PlatBio*>(plat);		//Pareil pour PlatBio et PlatBioVege
 			PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
 
-			if (platVege != nullptr) {
+			//On remplit le nouveau menu avec des plats alloués dynamiquement
+			if (platVege != nullptr) {								
 				listePlats_.push_back(allouerPlat(platVege));
 				listePlatsVege_.push_back(platVege);
 			}
@@ -86,9 +88,11 @@ Menu & Menu::operator=(const Menu & menu)
 				listePlats_.push_back(allouerPlat(platBioVege));
 				listePlatsVege_.push_back(platBioVege);
 			}
+			else {
+				listePlats_.push_back(allouerPlat(plat));
+			}
 		}
 	}
-
 	return *this;
 }
 
@@ -103,10 +107,11 @@ vector<Plat*> Menu::getListePlats() const
 
 Menu& Menu::operator+=(owner<Plat*> plat) 
 {
-	PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
-	PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
+	PlatVege* platVege = dynamic_cast<PlatVege*>(plat);			//Si le type du plat est PlatVege, dynamic_cast est réussi et le plat retourné est différent de nullptr
+	PlatBio* platBio = dynamic_cast<PlatBio*>(plat);			//Pareil pour PlatBio et PlatBioVege
 	PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
 
+	//On ajoute le plat dans les différentes listes selon son type
 	if (platVege != nullptr) {
 		listePlats_.push_back(platVege);
 		listePlatsVege_.push_back(platVege);
@@ -181,31 +186,25 @@ Plat* Menu::lirePlatDe(LectureFichierEnSections& fichier)
 ostream& operator<<(ostream& os, const Menu& menu)
 {   
 	for (Plat* plat : menu.listePlats_) {
-		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
-		PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
+		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);			//Si le type du plat est PlatVege, dynamic_cast est réussi et le plat retourné est différent de nullptr
+		PlatBio* platBio = dynamic_cast<PlatBio*>(plat);			//Pareil pour PlatBio et PlatBioVege
 		PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
-		bool platSpecial = 0; //Verifie si on est rentré dans une des boucles
 		
+		//On affiche le plat en fonction de son type
 		if (platVege != nullptr) {
-			platSpecial = 1;
 			platVege->PlatVege::afficherPlat(os);
 		} else if (platBioVege != nullptr) {
-			platSpecial = 1;
 			platBioVege->PlatBioVege::afficherPlat(os);
 		} else if (platBio != nullptr) {
-			platSpecial = 1;
 			platBio->PlatBio::afficherPlat(os);
-		}
-
-
-		if (!platSpecial) {
+		} else {
 			plat->Plat::afficherPlat(os);
 		}
 
 	}
 
 	os << endl <<  "MENU ENTIEREMENT VEGETARIEN" << endl;
-	
+	//Puis on affiche le menu végétarien
 	for (Plat* plat : menu.listePlats_) {
 		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
 		PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);

@@ -1,7 +1,9 @@
 /*
-* Date : 25 février 2019
-* Auteur : AbdeB
+* Titre : PlatVege.h - Travail Pratique #4
+* Date : 21 Mars 2019
+* Auteurs : Hugo Perronnet 1885263 - Philippe Maisonneuve 1959052
 */
+
 #ifndef PLAT_VEGE_H
 #define PLAT_VEGE_H
 
@@ -12,12 +14,29 @@ class PlatVege :
         public Vege, public Plat, public Taxable
 {
 public:
+	//Constructeur par paramètres
 	PlatVege(string nom = "inconnu", double prix = 0, double cout = 0, double vitamines = 0,
-    double proteines = 0, double mineraux = 0);//TODO ok
-    virtual ~PlatVege(); //Pas sure du virtual
-    Plat * clone()const; // TODO ok
-    virtual void afficherPlat(ostream & os) const;//TODO ok
-    virtual double calculerApportNutritif() const; // TODO ok
+    double proteines = 0, double mineraux = 0);
+	//Destructeur
+    virtual ~PlatVege();
+
+	/*
+	* Clone()
+	* Retourne un nouveau plat alloué dynamiquement
+	*/
+    Plat * clone()const;
+
+	/*
+	* afficherPlat()
+	* Affiche le plat en ajoutant les caractéristiques du platVege
+	*/
+    virtual void afficherPlat(ostream & os) const;
+
+	/*
+	* calculerApportNutritif()
+	* Retourne (vitamines_ *proteines_ / mineraux_) * RAPPORT_NUTRITIF
+	*/
+    virtual double calculerApportNutritif() const;
 	void setTaxe() override;
 	double getTaxe() const override;
 protected:

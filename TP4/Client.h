@@ -1,3 +1,9 @@
+/*
+* Titre : Client.h - Travail Pratique #4
+* Date : 21 Mars 2019
+* Auteurs : Hugo Perronnet 1885263 - Philippe Maisonneuve 1959052
+*/
+
 #ifndef CLIENT_H
 #define CLIENT_H
 
@@ -5,7 +11,6 @@
 #include <string_view>
 #include <iostream>
 #include "Table.h"
-//#include "Restaurant.h"
 #include "def.h"
 using std::string, std::string_view, std::ostream;  //? On ne devrait normalement pas faire de "using" global dans un .h, mais c'est accepte en INF1010.
 
@@ -26,7 +31,16 @@ public:
     void setTable(Table * ta);
 	//affichage
     virtual int getNbPoints() const = 0;
-    virtual void afficherClient(ostream & os) const = 0; // TODO ok
+
+	/*
+	* afficherClient() : fonction virtuelle pure
+	* Prend en paramètre un ostream
+	*/
+    virtual void afficherClient(ostream & os) const = 0;
+
+	/*
+	* getReduction : fonction virtuelle pure, pas d'implémentation
+	*/
     virtual double getReduction(const Restaurant & res, double montant, bool estLivraison) = 0  ;
 
 protected:

@@ -1,7 +1,9 @@
 /*
-* Date : 25 février 2019
-* Auteur : AbdeB
+* Titre : PlatBioVege.cpp - Travail Pratique #4
+* Date : 21 Mars 2019
+* Auteurs : Hugo Perronnet 1885263 - Philippe Maisonneuve 1959052
 */
+
 #include "PlatBioVege.h"
 
 PlatBioVege::PlatBioVege(string nom, double prix, double cout, double ecotaxe, double vitamines, double proteines, double mineraux)

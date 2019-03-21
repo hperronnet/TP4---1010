@@ -1,15 +1,13 @@
-//
-//  Boisson.cpp
-//  intra
-//
-//  Created by Martine Bellaiche on 2019-03-10.
-//  Copyright © 2019 Martine Bellaiche. All rights reserved.
-//
+/*
+* Titre : Boisson.cpp - Travail Pratique #4
+* Date : 21 Mars 2019
+* Auteurs : Hugo Perronnet 1885263 - Philippe Maisonneuve 1959052
+*/
 
 #include "Boisson.h"
 Boisson::Boisson (string_view nom, double prix): nom_(nom), prix_(prix)
 {
-	setTaxe();
+	setTaxe(); //On initialise la taxe
 }
 
 

@@ -1,7 +1,9 @@
 /*
-* Date : 25 février 2019
-* Auteur : AbdeB
+* Titre : Plat.h - Travail Pratique #4
+* Date : 21 Mars 2019
+* Auteurs : Hugo Perronnet 1885263 - Philippe Maisonneuve 1959052
 */
+
 
 #ifndef PLAT_H
 #define PLAT_H
@@ -17,7 +19,7 @@ class Plat {
 public:
 	// constructeur
 	Plat(string_view nom = "inconnu", double prix = 0, double cout = 0);
-    virtual ~Plat(); //PAS SUR DU VIRTUAL
+    virtual ~Plat();
 	//getters 
 	string getNom() const;
 	double getPrix() const;
@@ -29,9 +31,20 @@ public:
 
 	//methodes en plus
 	double getPrixRevient();
-    virtual Plat *  clone () const; // TODO ok
+
+	/*
+	* Clone() : fonction virtuelle
+	* Retourne un nouveau plat alloué dynamiquement
+	*/
+    virtual Plat *  clone () const;
 	bool operator < (const Plat& plat) const;
-    virtual void afficherPlat(ostream& os) const; // TODO ok
+
+	/*
+	* afficherPlat : fonction virtuelle
+	* Prend en paramètre un ostream
+	*/
+    virtual void afficherPlat(ostream& os) const; 
+
 
 
 protected:

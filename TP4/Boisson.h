@@ -1,9 +1,8 @@
-//
-//  Boisson.h
-//
-//  Created by Martine Bellaiche on 2019-03-05.
-//  Copyright © 2019 Martine Bellaiche. All rights reserved.
-//
+/*
+* Titre : Boisson.h - Travail Pratique #4
+* Date : 21 Mars 2019
+* Auteurs : Hugo Perronnet 1885263 - Philippe Maisonneuve 1959052
+*/
 
 #ifndef BOISSON_h
 #define BOISSON_h
@@ -11,7 +10,7 @@
 #include <string>
 #include <string_view>
 using namespace std;
-class Boisson : public Taxable // TODO
+class Boisson : public Taxable
 {
 
  public:
