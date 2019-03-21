@@ -37,15 +37,56 @@ Menu::Menu(const Menu & menu) : type_(menu.type_)
 {
 	for (Plat* plat : menu.listePlats_)
 	{
-		listePlats_.push_back(plat);
-		
+		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
+		PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
+		PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
+
+		if (platVege != nullptr) {
+			listePlats_.push_back(platVege);
+			listePlatsVege_.push_back(platVege);
+		}
+		else if (platBio != nullptr) {
+			listePlats_.push_back(platBio);
+		}
+		else if (platBioVege != nullptr) {
+			listePlats_.push_back(platBioVege);
+			listePlatsVege_.push_back(platBioVege);
+		}		
 
 	}
 }
 
 Menu & Menu::operator=(const Menu & menu)
 {
-        //TODO
+	if (this != &menu)
+	{
+		type_ = menu.type_;
+		for (Plat* plat : listePlats_) {
+			delete plat;
+		}
+
+		listePlats_.clear();
+		listePlatsVege_.clear();
+		for (Plat* plat : menu.listePlats_) {
+			PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
+			PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
+			PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
+
+			if (platVege != nullptr) {
+				listePlats_.push_back(allouerPlat(platVege));
+				listePlatsVege_.push_back(platVege);
+			}
+			else if (platBio != nullptr) {
+				listePlats_.push_back(allouerPlat(platBio));
+			}
+			else if (platBioVege != nullptr) {
+				listePlats_.push_back(allouerPlat(platBioVege));
+				listePlatsVege_.push_back(platBioVege);
+			}
+		}
+	}
+
+	return *this;
 }
 
 // Getters.
@@ -57,8 +98,24 @@ vector<Plat*> Menu::getListePlats() const
 
 // Autres methodes.
 
-Menu& Menu::operator+=(owner<Plat*> plat) {
-        //TODO
+Menu& Menu::operator+=(owner<Plat*> plat) 
+{
+	PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
+	PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
+	PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
+
+	if (platVege != nullptr) {
+		listePlats_.push_back(platVege);
+		listePlatsVege_.push_back(platVege);
+	}
+	else if (platBio != nullptr) {
+		listePlats_.push_back(platBio);
+	}
+	else if (platBioVege != nullptr) {
+		listePlats_.push_back(platBioVege);
+		listePlatsVege_.push_back(platBioVege);
+	}
+	return *this;
 }
 
 void Menu::lireMenu(const string& nomFichier) {
@@ -117,5 +174,42 @@ Plat* Menu::lirePlatDe(LectureFichierEnSections& fichier)
 
 ostream& operator<<(ostream& os, const Menu& menu)
 {   
-        //TODO
+	for (Plat* plat : menu.listePlats_) {
+		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
+		PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
+		PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
+		
+		if (platVege != nullptr) {
+			plat->afficherPlat(os);
+			platVege->afficherPlat(os);
+		}
+		if (platBio != nullptr) {
+			platBio->afficherPlat(os);
+		}
+		if (platBioVege != nullptr) {
+			plat->afficherPlat(os);
+			//Peut etre ajouter afficher plat bio
+			os << "ET ";
+			platBioVege->afficherPlat(os);
+		}
+		else {
+			plat->afficherPlat(os);
+		}
+	}
+
+	os << endl <<  "MENU ENTIEREMENT VEGETARIEN" << endl;
+	
+	for (Plat* plat : menu.listePlats_) {
+		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
+		PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
+
+		if (platVege != nullptr) {
+			platVege->afficherPlat(os);
+		}
+		else if (platBioVege != nullptr) {
+			platBioVege->afficherPlat(os);
+		}
+	}
+	
+	return os;
 }

@@ -18,8 +18,7 @@ Plat* PlatVege::clone()const
 
 
 void PlatVege::afficherPlat(ostream & os) const
-{   
-	Plat::afficherPlat(os);
+{  
 	os << "PLAT VEGE  ";
 	afficherVege(os);
 }

@@ -22,7 +22,7 @@ void PlatBio::setEcoTaxe(double ecoTaxe)
 }
 
 //TODO
-Plat * PlatBio:: clone () const
+Plat * PlatBio::clone () const
 {
 	return new PlatBio(nom_, prix_, cout_, ecoTaxe_);
 }
