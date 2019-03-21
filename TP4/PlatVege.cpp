@@ -18,12 +18,22 @@ Plat* PlatVege::clone()const
 
 
 void PlatVege::afficherPlat(ostream & os) const
-{  
-	os << "PLAT VEGE  ";
+{   
+	os << "PLAT ----" << Plat::nom_ << " - " << prix_ << " $ (" << cout_ << " $ pour le restaurant)." << endl << "PLAT VEGE  ";
 	afficherVege(os);
 }
 
 double PlatVege::calculerApportNutritif() const
 {
 	return (vitamines_ *proteines_ / mineraux_) * RAPPORT_NUTRITIF;
+}
+
+void PlatVege::setTaxe()
+{
+	taxe_ = 0.12*prix_;
+}
+
+
+double PlatVege::getTaxe() const {
+	return taxe_;
 }
