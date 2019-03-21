@@ -29,7 +29,7 @@ Plat * PlatBio::clone () const
 
 void PlatBio::afficherPlat(ostream& os) const
 {	
-	Plat::afficherPlat(os);						//Devrait appeler la fonction de Plat
+	Plat::afficherPlat(os);
 	os << "Plat Bio    comprend une Taxe ecologique de : " << ecoTaxe_ <<" $ " << endl;
 }
 

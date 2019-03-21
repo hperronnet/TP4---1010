@@ -118,7 +118,8 @@ int main()
     Boisson * b;
     PlatVege * v;
     for (size_t i = 0; i < listeTaxable.size(); i++)
-    {   taxe =listeTaxable[i]->getTaxe();
+    {  
+		taxe =listeTaxable[i]->getTaxe();
         b = dynamic_cast<Boisson *>(listeTaxable[i]);
         v = dynamic_cast<PlatVege *>(listeTaxable[i]);
         if (b)

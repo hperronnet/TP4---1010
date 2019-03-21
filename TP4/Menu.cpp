@@ -51,7 +51,10 @@ Menu::Menu(const Menu & menu) : type_(menu.type_)
 		else if (platBioVege != nullptr) {
 			listePlats_.push_back(platBioVege);
 			listePlatsVege_.push_back(platBioVege);
-		}		
+		}
+		else {
+			listePlats_.push_back(plat);
+		}
 
 	}
 }
@@ -114,6 +117,9 @@ Menu& Menu::operator+=(owner<Plat*> plat)
 	else if (platBioVege != nullptr) {
 		listePlats_.push_back(platBioVege);
 		listePlatsVege_.push_back(platBioVege);
+	}
+	else {
+		listePlats_.push_back(plat);
 	}
 	return *this;
 }
@@ -178,23 +184,24 @@ ostream& operator<<(ostream& os, const Menu& menu)
 		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
 		PlatBio* platBio = dynamic_cast<PlatBio*>(plat);
 		PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
+		bool platSpecial = 0; //Verifie si on est rentré dans une des boucles
 		
 		if (platVege != nullptr) {
-			plat->afficherPlat(os);
-			platVege->afficherPlat(os);
+			platSpecial = 1;
+			platVege->PlatVege::afficherPlat(os);
+		} else if (platBioVege != nullptr) {
+			platSpecial = 1;
+			platBioVege->PlatBioVege::afficherPlat(os);
+		} else if (platBio != nullptr) {
+			platSpecial = 1;
+			platBio->PlatBio::afficherPlat(os);
 		}
-		if (platBio != nullptr) {
-			platBio->afficherPlat(os);
+
+
+		if (!platSpecial) {
+			plat->Plat::afficherPlat(os);
 		}
-		if (platBioVege != nullptr) {
-			plat->afficherPlat(os);
-			//Peut etre ajouter afficher plat bio
-			os << "ET ";
-			platBioVege->afficherPlat(os);
-		}
-		else {
-			plat->afficherPlat(os);
-		}
+
 	}
 
 	os << endl <<  "MENU ENTIEREMENT VEGETARIEN" << endl;
@@ -202,12 +209,13 @@ ostream& operator<<(ostream& os, const Menu& menu)
 	for (Plat* plat : menu.listePlats_) {
 		PlatVege* platVege = dynamic_cast<PlatVege*>(plat);
 		PlatBioVege* platBioVege = dynamic_cast<PlatBioVege*>(plat);
-
 		if (platVege != nullptr) {
-			platVege->afficherPlat(os);
+			os << "PLAT VEGE  ";
+			platVege->afficherVege(os);
 		}
 		else if (platBioVege != nullptr) {
-			platBioVege->afficherPlat(os);
+			os << "PLAT VEGE  ";
+			platBioVege->afficherVege(os);
 		}
 	}
 	

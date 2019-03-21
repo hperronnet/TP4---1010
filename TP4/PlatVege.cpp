@@ -7,6 +7,7 @@
 PlatVege::PlatVege(string nom, double prix, double cout,
                    double vitamines, double proteines, double mineraux) : Plat(nom,prix,cout), Vege(nom,vitamines,proteines,mineraux)
 {
+	setTaxe();
 }
 
 PlatVege::~ PlatVege(){}
@@ -19,8 +20,10 @@ Plat* PlatVege::clone()const
 
 void PlatVege::afficherPlat(ostream & os) const
 {   
-	os << "PLAT ----" << Plat::nom_ << " - " << prix_ << " $ (" << cout_ << " $ pour le restaurant)." << endl << "PLAT VEGE  ";
+	Plat::afficherPlat(os);
+	os << "PLAT VEGE ";
 	afficherVege(os);
+	os << "(Apport nutritif de " << calculerApportNutritif() << "mg)" << endl;
 }
 
 double PlatVege::calculerApportNutritif() const
@@ -30,7 +33,7 @@ double PlatVege::calculerApportNutritif() const
 
 void PlatVege::setTaxe()
 {
-	taxe_ = 0.12*prix_;
+	taxe_ = 0.07;
 }
 
 
