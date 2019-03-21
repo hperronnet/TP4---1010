@@ -19,7 +19,9 @@ Plat* PlatVege::clone()const
 
 void PlatVege::afficherPlat(ostream & os) const
 {   
-	os << "PLAT ----" << Plat::nom_ << " - " << prix_ << " $ (" << cout_ << " $ pour le restaurant)." << endl << "PLAT VEGE  ";
+	Plat plat = static_cast<Plat>(*this);
+	plat.afficherPlat(os);
+	os << "PLAT VEGE  ";
 	afficherVege(os);
 }
 

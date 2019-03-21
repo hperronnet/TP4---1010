@@ -15,9 +15,9 @@ public:
 	PlatVege(string nom = "inconnu", double prix = 0, double cout = 0, double vitamines = 0,
     double proteines = 0, double mineraux = 0);//TODO ok
     virtual ~PlatVege(); //Pas sure du virtual
-    Plat * clone()const; // TODO ok
-    virtual void afficherPlat(ostream & os) const;//TODO ok
-    virtual double calculerApportNutritif() const; // TODO ok
+    Plat * clone()const override; // TODO ok
+	void afficherPlat(ostream & os) const override;//TODO ok
+    double calculerApportNutritif() const override; // TODO ok
 protected:
 
 };
