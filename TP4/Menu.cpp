@@ -23,7 +23,9 @@ Menu::Menu(string fichier, TypeMenu type) :
 
 Menu::~Menu()
 {
-	//TODO
+	for (Plat* plat : listePlats_) {
+		delete plat;
+	}
 }
 
 Plat* Menu::allouerPlat(Plat* plat) {
@@ -33,8 +35,12 @@ Plat* Menu::allouerPlat(Plat* plat) {
 
 Menu::Menu(const Menu & menu) : type_(menu.type_)
 {
-	//TODO
-  
+	for (Plat* plat : menu.listePlats_)
+	{
+		listePlats_.push_back(plat);
+		
+
+	}
 }
 
 Menu & Menu::operator=(const Menu & menu)

@@ -13,15 +13,15 @@ class ClientRegulier : public Client
 {
  public:
 	ClientRegulier();
-	ClientRegulier(string_view nom, string_view prenom, int tailleGroupe, int nbPoints);// TODO
+	ClientRegulier(string_view nom, string_view prenom, int tailleGroupe, int nbPoints);// TODO ok
     ~ClientRegulier();
 	//Accesseurs
      int getNbPoints() const ;
 
 	//Autres Methodes
 	void augmenterNbPoints(int bonus);
-    void afficherClient(ostream & os) const; // TODO
-    double getReduction(const Restaurant & res, double montant , bool estLivraison);// TODO
+    void afficherClient(ostream & os) const override; // TODO ok
+    double getReduction(const Restaurant & res, double montant , bool estLivraison) override;// TODO ok
 //
 protected:
 	int nbPoints_;

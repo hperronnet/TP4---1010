@@ -13,9 +13,8 @@ PlatBioVege:: ~PlatBioVege(){}
 
 
 void PlatBioVege::afficherPlat(ostream & os) const
-{   
-	PlatBio platBio = static_cast<PlatBio>(*this); 
-	platBio.afficherPlat(os);						//Devrait appeler la fonction de PlatBio
+{    
+	PlatBio::afficherPlat(os);						//Devrait appeler la fonction de PlatBio
 	os << "ET PLAT VEGE ";
 	afficherVege(os);
 }
