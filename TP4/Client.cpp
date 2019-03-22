@@ -40,7 +40,7 @@ void Client::afficherClient(ostream & os) const
 {
 	os << prenom_ << " " << nom_;
 	if (tableOccupee_ != nullptr) {
-		os << " a une place au resto" << endl;
+		os << " est à la place" << tableOccupee_ << endl;
 	}
 	else {
 		os << " n'a pas de place au resto" << endl;

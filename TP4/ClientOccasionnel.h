@@ -15,7 +15,7 @@ public:
 	//Constructeur
 	ClientOccasionnel(string_view nom, string_view prenom, int tailleGroupe);
 	//Destructeur
-	~ClientOccasionnel();
+	virtual ~ClientOccasionnel();
 
 	/*
 	* getNbPoints()

@@ -18,10 +18,10 @@ class ClientRegulier : public Client
 	ClientRegulier();
 	ClientRegulier(string_view nom, string_view prenom, int tailleGroupe, int nbPoints);
 	//Destructeur
-    ~ClientRegulier();
+    virtual ~ClientRegulier();
 
 	//Accesseurs
-     int getNbPoints() const ;
+    int getNbPoints() const override ;
 
 	//Autres Methodes
 	void augmenterNbPoints(int bonus);
@@ -37,7 +37,7 @@ class ClientRegulier : public Client
 	* Retourne la réduaction du client si il y est éligible (nb de points suffisants)
 	* Prend en paramètre un restaurant, le montant, et indique si c'est une livraison ou pas
 	*/
-    double getReduction(const Restaurant & res, double montant , bool estLivraison) override;// TODO
+	double getReduction(const Restaurant & res, double montant, bool estLivraison) override;
 protected:
 	int nbPoints_;
 };

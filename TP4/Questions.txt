@@ -1,0 +1,6 @@
+Question 1 : Voir UML.pdf
+
+Question 2 : Une interface ne contient que des méthode qui ne sont pas implémentées
+
+	     Une classe abstraite ne peut pas être instanciée et contient au moins une méthode virtuelle pure mais 
+	     peut contenir des méthode implémentées qui pourront êtres réutilisées dans les classes qui en héritent

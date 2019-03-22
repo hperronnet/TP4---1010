@@ -18,7 +18,7 @@ public:
 	ClientPrestige(string_view nom, string_view prenom, int tailleGroupe, 
 		           int nbPoints, ZoneHabitation adresse);
 	//Destructeur
-     ~ClientPrestige(){};
+    virtual ~ClientPrestige(){};
 
 	//Accesseur 
 	ZoneHabitation getAdresseCode() const;
@@ -30,7 +30,7 @@ public:
 	 * Appelle la fonction Client::afficherClient()
 	 * Prend en paramètre un ostream
 	 */
-    void afficherClient(ostream & os) const;
+    void afficherClient(ostream & os) const override;
 	string getAdressCodeString() const;
 
 	/*
@@ -39,7 +39,7 @@ public:
 	*  Si il y a livraison et que le Client dispose du nombre de points requis, n'ajoute pas les frais de livraison.
 	* Prend en paramètre un restaurant, le montant, et indique si c'est une livraison ou pas
 	*/
-    double getReduction(const Restaurant & res, double montant, bool estLivraison);
+    double getReduction(const Restaurant & res, double montant, bool estLivraison) override;
 
 private:
 	ZoneHabitation adresse_;

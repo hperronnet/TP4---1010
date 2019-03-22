@@ -17,7 +17,6 @@ public:
 	Table(int id = -1, int nbPlaces = 1);
 
 	// Getters.
-
 	int getId() const;
 	int getNbPlaces() const;
 	bool estOccupee() const;
@@ -29,16 +28,13 @@ public:
 
 
 	// Setters.
-
 	void libererTable();
 	void placerClients(int nbClients);
 	void setId(int id);
 	void setClientPrincipal(Client* clientPrincipal);
 
 	// Autres methodes.
-
 	void commander(Plat* plat);
-
 	friend ostream& operator<<(ostream& os, const Table& table);
 
 private :
